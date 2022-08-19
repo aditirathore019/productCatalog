@@ -43,9 +43,9 @@ public class ProductController {
         return "product";
     }
 
-    @GetMapping("/service")
-    public String serviceAbility(HttpServletRequest req,HttpServletResponse res, Model model,Long code,Long pincode) throws IOException {
-        Integer i = productService.getExpectedDay(req,res,code,pincode);
+    @GetMapping("/service/{pincode}")
+    public String serviceAbility(HttpServletRequest req,HttpServletResponse res, Model model,@PathVariable("pincode") Long pincode) throws IOException {
+        Integer i = productService.getExpectedDay(req,res,pincode);
         model.addAttribute("service",i);
         return "service";
 

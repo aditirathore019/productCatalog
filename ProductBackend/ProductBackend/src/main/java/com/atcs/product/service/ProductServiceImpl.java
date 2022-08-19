@@ -2,6 +2,7 @@ package com.atcs.product.service;
 
 import com.atcs.product.model.Pincode;
 import com.atcs.product.model.Product;
+import com.atcs.product.repo.PincodeRepo;
 import com.atcs.product.repo.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,9 @@ public class ProductServiceImpl implements ProductService{
 
     @Autowired
     ProductRepo productRepo;
+
+    @Autowired
+    PincodeRepo pincodeRepo;
 
     @Override
     public List<Product> getAll() {
@@ -59,17 +63,45 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Integer servicable(String code, Long pincode) {
-        Product pro = productRepo.findByProductCode(code);
-        List<Pincode> pincodes = pro.getProPincodes();
-        for(Pincode pin:pincodes)
-        {
-            if(pin.getPin()==pincode)
-            {
-                return pin.getDays();
+    public Integer servicable(Long pincode) {
+        List<Pincode> pincodeList = pincodeRepo.findAll();
+        System.out.println(pincodeList);
+        for(Pincode pinObj: pincodeList){
+            System.out.println(pincode);
+            System.out.println(pinObj.getPin());
+            if(pincode.equals(pinObj.getPin())){
+                System.out.println("inside");
+                return pinObj.getDays();
             }
         }
         return null;
     }
+
+    @Override
+    public List<Product> filterProducts(Double price1, Double price2) {
+        List<Product> allProducts = productRepo.findAll();
+        List<Product> filteredProducts = new ArrayList<>();
+        for (Product product: allProducts){
+            if(product.getProPrice()>=price1 && product.getProPrice()<=price2){
+                filteredProducts.add(product);
+            }
+        }
+        return filteredProducts;
+    }
+
+
+//    @Override
+//    public Integer servicable(String code, Long pincode) {
+//        Product pro = productRepo.findByProductCode(code);
+//        List<Pincode> pincodes = pro.getProPincodes();
+//        for(Pincode pin:pincodes)
+//        {
+//            if(pin.getPin()==pincode)
+//            {
+//                return pin.getDays();
+//            }
+//        }
+//        return null;
+//    }
 
 }

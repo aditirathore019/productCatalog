@@ -25,8 +25,4 @@ public class Product {
     private String proBrand;
 
     private String imgUrl;
-
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<Pincode> proPincodes;
-
 }

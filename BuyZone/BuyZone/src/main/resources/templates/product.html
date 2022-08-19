@@ -19,10 +19,12 @@
             <img th:src="${product.imgUrl}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title" th:text="${product.proName}" ></h5>
+                <h6 class="card-title" th:text="${product.proBrand}" ></h6>
                 <p class="card-text" th:text="${product.proDescription}"></p>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

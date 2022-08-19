@@ -18,13 +18,11 @@ public interface ProductService {
 
     public List<String> getPrices(List<String> codes);
 
-    public Integer servicable(String code,Long pincode);
+    public Integer servicable(Long pincode);
+
+    public List<Product> filterProducts(Double price1, Double price2);
 
 
-//    public Product findByName(String name);
-//
-//    public Product findByProduct(String code);
-//
-//    public Product findByBrandName(String brand);
+//    public Integer servicable(String code,Long pincode);
 
 }

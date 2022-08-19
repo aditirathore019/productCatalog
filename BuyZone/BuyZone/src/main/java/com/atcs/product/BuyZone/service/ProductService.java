@@ -76,7 +76,7 @@ public class ProductService {
     }
 
 
-    public Integer getExpectedDay(HttpServletRequest req, HttpServletResponse res, Long id,Long pincode) throws IOException {
+    public Integer getExpectedDay(HttpServletRequest req, HttpServletResponse res,Long pincode) throws IOException {
 
         if(authService.checkAuthToken(req))
         {
@@ -85,7 +85,7 @@ public class ProductService {
             httpHeaders.add("Authorization", "Bearer " + token);
             HttpEntity<String> entity = new HttpEntity<String>("parameters", httpHeaders);
             //  String str = "{/name}";
-            ResponseEntity<Pincode> pr = localApiClient.exchange("http://localhost:8081/product/service", HttpMethod.GET,entity, Pincode.class);
+            ResponseEntity<Pincode> pr = localApiClient.exchange("http://localhost:8081/product/service/" + pincode, HttpMethod.GET,entity, Pincode.class);
 
             return pr.getBody().getDays();
 
@@ -120,69 +120,4 @@ public class ProductService {
         return null;
     }
 
-//  public Product getByName(HttpServletRequest req, HttpServletResponse res, String name) throws IOException {
-//
-//        if(authService.checkAuthToken(req))
-//        {
-//            String token = authService.extractToken(req);
-//            HttpHeaders httpHeaders = new HttpHeaders();
-//            httpHeaders.add("Authorization", "Bearer " + token);
-//            HttpEntity<String> entity = new HttpEntity<String>("parameters", httpHeaders);
-//          //  String str = "{/name}";
-//            ResponseEntity<Product> pr = localApiClient.exchange("http://localhost:8081/product/name/" + name, HttpMethod.GET,entity, Product.class);
-//
-//            return pr.getBody();
-//
-//        }
-//        else
-//        {
-//            res.sendRedirect("/error/access-denied");
-//        }
-//
-//        return null;
-//    }
-//
-//    public Product getByBrand(HttpServletRequest req, HttpServletResponse res, String name) throws IOException {
-//
-//        if(authService.checkAuthToken(req))
-//        {
-//            String token = authService.extractToken(req);
-//            HttpHeaders httpHeaders = new HttpHeaders();
-//            httpHeaders.add("Authorization", "Bearer " + token);
-//            HttpEntity<String> entity = new HttpEntity<String>("parameters", httpHeaders);
-//            //  String str = "{/name}";
-//            ResponseEntity<Product> pr = localApiClient.exchange("http://localhost:8081/product/brand/" + name, HttpMethod.GET,entity, Product.class);
-//
-//            return pr.getBody();
-//
-//        }
-//        else
-//        {
-//            res.sendRedirect("/error/access-denied");
-//        }
-//
-//        return null;
-//    }
-//
-//    public Product getByCode(HttpServletRequest req, HttpServletResponse res, Long id) throws IOException {
-//
-//        if(authService.checkAuthToken(req))
-//        {
-//            String token = authService.extractToken(req);
-//            HttpHeaders httpHeaders = new HttpHeaders();
-//            httpHeaders.add("Authorization", "Bearer " + token);
-//            HttpEntity<String> entity = new HttpEntity<String>("parameters", httpHeaders);
-//            //  String str = "{/name}";
-//            ResponseEntity<Product> pr = localApiClient.exchange("http://localhost:8081/product/code/" + id, HttpMethod.GET,entity, Product.class);
-//
-//            return pr.getBody();
-//
-//        }
-//        else
-//        {
-//            res.sendRedirect("/error/access-denied");
-//        }
-//
-//        return null;
-//    }
 }

@@ -35,10 +35,10 @@ public class ProductController {
         return productService.getPrices(codes);
     }
 
-    @GetMapping("/service")
-    public Integer serviceAbility(String code,Long pincode)
+    @GetMapping("/service/{pincode}")
+    public Integer serviceAbility(@PathVariable("pincode") Long pincode)
     {
-       return productService.servicable(code,pincode);
+       return productService.servicable(pincode);
     }
 
     @GetMapping("/searchResults/{parameter}")
@@ -46,23 +46,9 @@ public class ProductController {
         return productService.getByParameter(parameter);
     }
 
-
-//    @GetMapping("/name/{name}")
-//    public Product findByName(@PathVariable("name") String name)
-//    {
-//        return productService.findByName(name);
-//    }
-//
-//    @GetMapping("/code/{code}")
-//    public Product findByCode(@PathVariable("code") String code)
-//    {
-//        return productService.findByProduct(code);
-//    }
-//
-//    @GetMapping("/brand/{brand}")
-//    public Product findByBrand(@PathVariable("brand") String brand)
-//    {
-//        return productService.findByBrandName(brand);
-//    }
+    @GetMapping("/filter/{price1}/{price2}")
+    public List<Product> filterProducts(@PathVariable("price1") Double price1, @PathVariable("price2") Double price2){
+        return productService.filterProducts(price1,price2);
+    }
 
 }

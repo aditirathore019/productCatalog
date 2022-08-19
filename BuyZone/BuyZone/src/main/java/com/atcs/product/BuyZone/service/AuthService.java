@@ -42,7 +42,7 @@ public class AuthService {
 
         if(checkAuthToken(req))
         {
-            res.sendRedirect("http://localhost:5000/home");
+            res.sendRedirect("http://localhost:5000/");
            return;
         }
         // create request body
@@ -62,7 +62,7 @@ public class AuthService {
         res.addCookie(auth);
         httpServletResponseGlobal=res;
         log.info("res{}",auth);
-        res.sendRedirect("http://localhost:5000/home");
+        res.sendRedirect("http://localhost:5000/");
 
 
 
