@@ -119,5 +119,26 @@ public class ProductService {
 
         return null;
     }
+    public List<Product> getFilteredProducts(HttpServletRequest req, HttpServletResponse res, Double price1, Double price2) throws IOException {
+
+        if(authService.checkAuthToken(req))
+        {
+            String token = authService.extractToken(req);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add("Authorization", "Bearer " + token);
+            HttpEntity<String> entity = new HttpEntity<String>("parameters", httpHeaders);
+            //  String str = "{/name}";
+            ResponseEntity<Product[]> pr = localApiClient.exchange("http://localhost:8081/product/filter/" + price1 + "/" + price2, HttpMethod.GET,entity, Product[].class);
+
+            return Arrays.asList(pr.getBody());
+
+        }
+        else
+        {
+            res.sendRedirect("/error/access-denied");
+        }
+
+        return null;
+    }
 
 }

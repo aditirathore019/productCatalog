@@ -48,27 +48,15 @@ public class ProductController {
         Integer i = productService.getExpectedDay(req,res,pincode);
         model.addAttribute("service",i);
         return "service";
-
     }
-//    @GetMapping("/name/{name}")
-//    public String getByName(HttpServletRequest req, HttpServletResponse res, Model model, @PathVariable("name") String name) throws IOException{
-//        Product product = productService.getByName(req,res,name);
-//        model.addAttribute("product",product);
-//        return "product";
-//    }
-//
-//    @GetMapping("/brand/{brand}")
-//    public String getByBrand(HttpServletRequest req, HttpServletResponse res, Model model, @PathVariable("brand") String brand) throws IOException{
-//        Product product = productService.getByBrand(req,res,brand);
-//        model.addAttribute("product",product);
-//        return "product";
-//    }
-//
-//    @GetMapping("/code/{code}")
-//    public String getByCode(HttpServletRequest req, HttpServletResponse res, Model model, @PathVariable("code") Long code) throws IOException{
-//        Product product = productService.getByCode(req,res,code);
-//        model.addAttribute("product",product);
-//        return "product";
-//    }
+
+    @GetMapping("/filter/{price1}/{price2}")
+    public String filterProducts(HttpServletRequest req, HttpServletResponse res, Model model, @PathVariable("price1") Double price1, @PathVariable("price2") Double price2) throws IOException {
+        List<Product> product = productService.getFilteredProducts(req,res,price1,price2);
+        model.addAttribute("products",product);
+        return "product";
+    }
+
+
 
 }
