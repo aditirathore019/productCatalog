@@ -13,7 +13,7 @@ import java.util.List;
 public class Product {
 
 
-    private Long proId;
+    private String productCode;
 
     private String proName;
 
@@ -24,7 +24,5 @@ public class Product {
     private String proBrand;
 
     private String imgUrl;
-
-    private List<Pincode> proPincodes;
 
 }
